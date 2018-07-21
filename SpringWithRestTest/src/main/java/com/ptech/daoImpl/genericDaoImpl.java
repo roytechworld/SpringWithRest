@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -146,13 +147,23 @@ public static final Logger log=LoggerFactory.getLogger(genericDaoImpl.class);
 		return listobj;
 		
 	}
-
+	@Transactional
+	@SuppressWarnings("unchecked")
 	@Override
 	public T getData(String value, String query) {
 		// TODO Auto-generated method stub
-	
+		T obj=null;
+		try
+		{
+			
+		obj=(T) this.session.getCurrentSession().createQuery(query).setString("name", value).uniqueResult();
+		}
+		catch(Exception e)
+		{
+		log.error(e+"");	
+		}
 		
-		return (T) this.session.getCurrentSession().createQuery(query).setString("name", value).uniqueResult();
+		return obj;
 	}
 	
 	

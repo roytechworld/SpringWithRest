@@ -13,7 +13,7 @@ import com.ptech.dao.genericDao;
 import com.ptech.other.PtechConstant;
 import com.ptech.pojo.Data;
 import com.ptech.pojo.StudentMaster;
-import com.ptech.service.MyServiceDao;
+
 
 @RestController
 public class PtechRestController<T> extends PtechConstant {
@@ -31,7 +31,7 @@ public Data getData(@RequestParam(value="id",defaultValue="0")Integer id)
 
 
 @RequestMapping("/getStudentdata")
-public StudentMaster getStudentData(@RequestParam(value="studentname") String name)
+public StudentMaster getStudentData(@RequestParam(value="name") String name)
 {
 	
 return studentdao.getData(name, getStudentDataByName);
